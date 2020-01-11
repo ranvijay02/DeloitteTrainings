@@ -1,0 +1,45 @@
+package com.deloitte.jdbc;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+public class JdbcSelect {
+
+	public static void main(String[] args) {
+		String driver = "oracle.jdbc.driver.OracleDriver";
+		String url = "jdbc:oracle:thin:@localhost:1521:xe";
+		String user = "deloitte";
+		String password = "del123";
+		String query = "select id,name,age,designation,doj,dept from employee";
+		Connection conn = null;
+
+		try {
+			Class.forName(driver);
+			System.out.println("Driver loaded");
+			conn = DriverManager.getConnection(url, user, password);
+			System.out.println(" Connection established");
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(query);
+			while (rs.next()) {
+				System.out.println(rs.getInt(1) + "," + rs.getString(2) + "," + rs.getInt(3) + "," + rs.getString(4)
+						+ "," + rs.getDate(5) + "," + rs.getInt(6));
+			}
+
+		} catch (ClassNotFoundException e) {
+
+			e.printStackTrace();
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		} finally {
+			if (conn != null)
+				try {
+					conn.close();
+				} catch (SQLException e) {
+				}
+		}
+	}
+}
