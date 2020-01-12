@@ -1,0 +1,119 @@
+import java.lang.*;
+import java.util.*;
+
+interface Shape{
+    public abstract double getArea();
+    public abstract double getPerimeter();
+}
+
+abstract class AbstractShape implements Shape{
+    private String colour;
+    
+    AbstractShape(String colour)
+    {
+        this.colour=colour;    
+    }
+    
+    public String getColour(){
+        return colour;
+    }
+    
+    @Override
+    public String toString(){
+        return "colour="+colour;
+    }
+}
+
+class Rectangle extends AbstractShape{
+    private int length;
+    private int breadth;
+    
+    Rectangle(String colour,int length,int breadth){
+        super(colour);
+        this.length=length;
+        this.breadth=breadth;
+    }
+    
+    public double getArea(){
+        return (length*breadth);
+    }
+    
+    public double getPerimeter(){
+        return (2*(length+breadth));
+    }
+    
+    @Override
+    public String toString(){
+        return "Rectangle [colour="+getColour()+", length="+length+", breadth="+breadth+"]";
+    }
+}
+
+class Circle extends AbstractShape{
+    private int radius;
+    
+    public Circle(String colour,int radius)
+    {
+        super(colour);
+        this.radius=radius;
+    }
+    
+    public double getArea(){
+        return (Math.PI*radius*radius);
+    }
+    
+    public double getPerimeter(){
+        return (2*Math.PI*radius);
+    }
+    
+    @Override
+    public String toString(){
+        return "Circle [colour="+getColour()+", radius="+radius+"]";
+    }
+}
+
+public class Source
+{
+    public static void main(String[] args){
+        Scanner in=new Scanner(System.in);
+        
+        String first,c;
+        String s1="CIRCLE";
+        String s2="RECTANGLE";
+        int r,l,b;
+        
+        first=in.nextLine().toUpperCase();
+        
+        if(first.equals(s1))
+        {  
+            c=in.next().toUpperCase();
+            r=in.nextInt();
+            
+            Circle C=new Circle(c,r);
+            System.out.println(C.toString());
+            Source.printShape(null,C);
+            
+        }
+        if(first.equals(s2))
+        {
+            c=in.next().toUpperCase();
+            l=in.nextInt();
+            b=in.nextInt();
+            
+            Rectangle R=new Rectangle(c,l,b);
+            System.out.println(R.toString());
+            Source.printShape(R,null);
+           
+        }
+    }
+    public static void printShape(Rectangle R1,Circle C1)
+        {
+            if(R1==null)
+            {
+            System.out.println("Area: "+Math.round(C1.getArea())+",Perimeter: "+Math.round(C1.getPerimeter()));
+            }
+            if(C1==null)
+            {
+            System.out.println("Area: "+Math.round(R1.getArea())+",Perimeter: "+Math.round(R1.getPerimeter()));
+            }
+        }
+}

@@ -1,0 +1,112 @@
+import java.util.Scanner;
+ abstract class Player
+{
+	String firstName="";
+	String lastName="";
+	public Player(String firstName,String lastName)
+	{
+		this.firstName=firstName;
+		this.lastName=lastName;
+	}
+	public String getName()
+	{
+		String s= firstName +" "+lastName;
+		return s;
+	}
+	public abstract int getRating();
+}
+class CricketPlayer extends Player
+{
+	double averageRun;
+	public CricketPlayer(String firstName,String lastName,double averageRun)
+	{
+		super(firstName,lastName);
+		this.averageRun=averageRun;
+	}
+	public int getRating()
+	{
+		if(averageRun>55)
+		{
+			return 7;
+		}
+		else if (averageRun>50 && averageRun<=55)
+		{
+			return 6;
+		}
+		else if(averageRun>40 && averageRun<=50)
+		{
+			return 5;
+		}
+		else if(averageRun>30 && averageRun<=40)
+		{
+			return 3;
+		}
+		else if (averageRun>20 && averageRun<=30)
+		{
+			return 2;
+		}
+		else 
+		{
+			return 1;
+		}
+	}
+}
+class FootballPlayer extends Player
+{
+	int goals;
+	public FootballPlayer(String firstName,String lastName,int goals)
+	{
+		super(firstName,lastName);
+		this.goals=goals;
+	}
+	public int getRating()
+	{
+		if(goals>20)
+		{
+			return 5;
+		}
+		else if(goals>15 && goals <=20)
+		{
+			return 4;
+		}
+		else if(goals >10 && goals <=15)
+		{
+			return 3;
+		}
+		else if (goals >5 && goals <=10)
+		{
+			return 2;
+
+		}
+		else 
+		{	
+			return 1;
+		}
+	}
+}
+public class Sourrce{
+    public static void main(String[] args)
+    {
+        //CODE HERE
+        int r=0;
+        double g=0.0;
+        String fn="",ln="";
+        Scanner sc=new Scanner(System.in);
+        try
+        {
+        	r=sc.nextInt();
+        	g=sc.nextDouble();
+        	fn=sc.nextLine();
+        	ln=sc.nextLine();
+        }
+        catch(Exception e)
+        {
+        	System.out.println("INVALID INPUT");
+        }
+        CricketPlayer c= new CricketPlayer(fn,ln,g);
+        FootballPlayer f=new FootballPlayer(fn,ln,r);
+
+
+
+    }
+}

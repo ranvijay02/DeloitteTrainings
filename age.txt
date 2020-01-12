@@ -1,0 +1,64 @@
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Scanner;
+import java.text.*;
+
+
+class AgeCalculator
+{
+   public int[] calculateAge(String input){
+       SimpleDateFormat format = new SimpleDateFormat("ss/MM/yyyy");
+       try{
+           Date dob = format.parse(input);
+           Date target = format.parse("01/04/2019");
+           
+           //null 
+           if(!dob.before(target)) return null;
+           
+           Calendar dobCal = Calendar.getInstance();
+           dobCal.setTime(dob);
+           Calendar targetCal = Calendar.getInstance();
+           targetCal.setTime(target);
+           
+           int years = targetCal.get(Calendar.YEAR) - dobCal.get(Calendar.YEAR);
+           int months = targetCal.get(Calendar.MONTH) - dobCal.get(Calendar.MONTH);
+           if(months < 0){
+               years --;
+               months = 12 + months;
+           }
+           return new int[]{years,months};
+           }
+           catch(ParseException e){
+               return null;
+           }
+       }
+ }
+ 
+ public class Source
+{  
+    
+public static void main(String[] args) throws ParseException
+   {
+      AgeCalculator AG = new AgeCalculator();
+      int[] OPDOB = new int[2];
+      Scanner input = new Scanner(System.in);
+      String DOB = input.nextLine(); 
+      OPDOB = AG.calculateAge(DOB);
+      if (OPDOB == null){
+          System.out.println("Invalid date of birth");                      
+      }
+      else if(OPDOB[0] == 0){
+          System.out.println("Months : "+OPDOB[1]);
+          
+      }
+       else if(OPDOB[1] == 0){
+          System.out.println("Years : "+OPDOB[0]);
+          
+      }
+       else{
+      System.out.println("Years : "+OPDOB[0]+", Months : "+OPDOB[1]);
+       }
+      }
+   }

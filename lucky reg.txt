@@ -1,0 +1,50 @@
+
+import java.util.Scanner;
+public class Source {
+    public static void main(String args[]) {
+        String regisnum;
+        int result;
+        Scanner s = new Scanner(System.in);
+        regisnum = s.next();
+        result = Source.checkRegistrationNumber(regisnum);
+        if (result == -1)
+        System.out.println("Invalid registration number");
+        if (result == 0)
+        System.out.println("Valid regitration number");
+        if (result == 1)
+        System.out.println("Lucky regitration number");
+    }
+    
+    public static int checkRegistrationNumber(String regisnum) {
+        if(regisnum==null||regisnum.isEmpty()||!(regisnum.matches("(KA|DL)((0[1-9])|10)([A-Z]|([A-Z][A-Z]))[1-9][0-9][0-9][0-9]")))
+        return -1;
+        else {
+            String yyyy;
+            if(regisnum.length()==10) {
+            yyyy = regisnum.substring(6,10);
+            }
+            else {
+            yyyy = regisnum.substring(5,9);
+            }
+            if (regisnum.matches("(KA|DL)((0[1-9])|10)([A-Z]|([A-Z][A-Z]))[1-9][0-9][0-9][0-9]")) {
+                int check = Integer.parseInt(yyyy);
+                int temp,n,sum;
+                while (check>=10) {
+                    temp=check;
+                    sum=0;
+                    while(temp>0) {
+                        n=temp%10;
+                        sum=sum+n;
+                        temp=temp/10;
+                    }
+                    check=sum;
+                }
+                if (check==6)
+                return 1;
+                else 
+                return 0;
+            }
+            else return -1;
+        }
+    }
+}

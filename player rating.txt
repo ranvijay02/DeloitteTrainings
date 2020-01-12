@@ -1,0 +1,58 @@
+//Create all the required classes here 
+abstract class Player{
+    private String firstname;
+    private String lastname;
+    Player(String firstname,String lastname)
+    {
+        this.firstname = firstname;
+        this.lastname = lastname;
+    }
+    public String getName(){
+        return firstname+" "+lastname;
+    }
+    abstract int getRating();
+}
+
+class CrcicketPlayer extends Player
+{
+    double averageRuns;
+    CrcicketPlayer(String firstname,String lastname,double averageRuns){
+        super(firstname,lastname);
+        this.averageRuns=averageRuns;
+    }
+    public int getRating(){
+        if(averageRuns>55){return 7;}
+        else if(averageRuns>50){return 6;}
+        else if(averageRuns>40){return 5;}
+        else if(averageRuns>30){return 3;}
+        else if(averageRuns>20){return 2;}
+        else {return 1;}
+    }
+}
+
+class FootballPlayer extends Player
+{
+    int goals;
+    FootballPlayer(String firstname,String lastname,int goals){
+        super(firstname,lastname);
+        this.goals=goals;
+    }
+    public int getRating(){
+        if(goals>20){return 5;}
+        else if(goals>15){return 4;}
+        else if(goals>10){return 3;}
+        else if(goals>5){return 2;}
+        else {return 1;}
+    }
+}
+
+public class Source{
+    public static void main(String[] args){
+        //CODE HERE
+        FootballPlayer f = new FootballPlayer("Chirstiano","Messi",0);
+        String c=f.getName();
+        System.out.println(c);
+        int x = f.getRating();
+        System.out.println(x);
+    }
+}

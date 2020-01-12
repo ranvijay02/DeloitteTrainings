@@ -1,0 +1,51 @@
+import java.util.Scanner;
+
+public class Source{
+    // Code here
+   static int getMaxDigit(String str) 
+    { 
+        int num = 0, res = 0,op = 0; 
+        if(str == null || str.isEmpty() || str.matches("\\D+") == true ){op = -1;}
+        else{
+
+        // Start traversing the given string 
+        for (int i = 0; i<str.length(); i++) 
+        { 
+            
+            // If a numeric value comes, start converting 
+            // it into an integer till there are consecutive 
+            // numeric digits 
+            if (Character.isDigit(str.charAt(i))) 
+                num = (str.charAt(i)-'0'); 
+       
+            // Update maximum value 
+            else
+            { 
+                res = Math.max(res, num); 
+       
+                // Reset the number 
+                num = 0; 
+            } 
+        } 
+       
+        // Return maximum value 
+        
+        op = Math.max(res, num); 
+      }
+      return op;
+    } 
+    // Driver method 
+    public static void main(String[] args)  
+    { 
+        try{
+        Scanner ss = new Scanner(System.in);
+        String str = ss.nextLine();
+        if(getMaxDigit(str)==0 || getMaxDigit(str)== -1){System.out.println("No digits in string");}
+        else{
+        System.out.println("Max digit : "+getMaxDigit(str)); 
+        }
+        }
+        catch(Exception e){System.out.println("No digits in string");}
+    }  
+    }
+

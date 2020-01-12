@@ -1,0 +1,39 @@
+import java.util.*;
+import java.lang.*;
+class Account{
+    int accountNo;
+    double balance;
+    String accountType;
+    static int counter=0;
+    Account(double balance,String accountType){
+        this.balance=balance;
+        this.accountType=accountType;
+        this.accountNo=counter+1;
+    }
+    void depositAmount(double amount){
+        balance=balance+amount;
+        System.out.println("New Balance : "+balance);
+    }
+    void printAccountDetails(){
+        System.out.println("[Acct No : "+accountNo+", Type : "+accountType+", Balance : "+balance+"]\n");
+    }
+}
+class Source{
+    public static void main(String args[]){
+        Scanner sc=new Scanner(System.in);
+        double amt1,amt2,bal1,bal2;
+        String accType1, accType2;
+        amt1=sc.nextDouble();
+        accType1=sc.next();
+        bal1=sc.nextDouble();
+        Account acc1=new Account(bal1,accType1);
+        acc1.depositAmount(amt1);
+        acc1.printAccountDetails();
+        amt2=sc.nextDouble();
+        accType2=sc.next();
+        bal2=sc.nextDouble();
+        Account acc2=new Account(bal2,accType2);
+        acc2.depositAmount(amt2);
+        acc2.printAccountDetails();
+    }
+}

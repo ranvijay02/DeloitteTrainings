@@ -1,0 +1,51 @@
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Scanner;
+
+public class Source {
+    public static void main(String[] args) throws ParseException {
+        Scanner s=new Scanner(System.in);
+        String d=s.nextLine();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        Date birthDate = sdf.parse(d);
+        String str=sdf.format(birthDate);
+        System.out.println(getDayOfDate(str));
+    }
+    public static String getDayOfDate(String date) throws ParseException {
+		//CODE HERE
+        Calendar c = Calendar.getInstance();
+        String stringDate="";
+        Date date1=new SimpleDateFormat("dd/MM/yyyy").parse(date);
+        c.setTime(date1);
+        int dayOfWeek = c.get(Calendar.DAY_OF_WEEK);
+        switch(dayOfWeek)
+            {
+            case 1:
+                stringDate="Sunday";
+            break;
+            case 2:
+                stringDate="Monday";
+            break;
+            case 3:
+                stringDate="Tuesday";
+            break;
+            case 4:
+                stringDate="Wednesday";
+            break;
+            case 5:
+                stringDate="Thursday";
+            break;
+            case 6:
+                stringDate="Friday";
+            break;
+            case 7:
+                stringDate="Saturday";
+            break;
+        }
+	
+	return stringDate;
+	}
+}
